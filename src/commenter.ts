@@ -1,7 +1,7 @@
-import { getInput, info, warning } from '@actions/core'
+import {getInput, info, warning} from '@actions/core'
 // eslint-disable-next-line camelcase
-import { context as github_context } from '@actions/github'
-import { octokit } from './octokit'
+import {context as github_context} from '@actions/github'
+import {octokit} from './octokit'
 
 // eslint-disable-next-line camelcase
 const context = github_context
@@ -519,7 +519,7 @@ ${chain}
         reviewComments,
         topLevelComment
       )
-      return { chain, topLevelComment }
+      return {chain, topLevelComment}
     } catch (e) {
       warning(`Failed to get conversation chain: ${e}`)
       return {
@@ -557,8 +557,8 @@ ${chain}
     const allComments: any[] = []
     let page = 1
     try {
-      for (; ;) {
-        const { data: comments } = await octokit.pulls.listReviewComments({
+      for (;;) {
+        const {data: comments} = await octokit.pulls.listReviewComments({
           owner: repo.owner,
           repo: repo.repo,
           // eslint-disable-next-line camelcase
@@ -648,8 +648,8 @@ ${chain}
     const allComments: any[] = []
     let page = 1
     try {
-      for (; ;) {
-        const { data: comments } = await octokit.issues.listComments({
+      for (;;) {
+        const {data: comments} = await octokit.issues.listComments({
           owner: repo.owner,
           repo: repo.repo,
           // eslint-disable-next-line camelcase

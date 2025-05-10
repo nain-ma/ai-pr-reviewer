@@ -1,32 +1,32 @@
-import fetch from 'node-fetch';
+import fetch from 'node-fetch'
 
-const API_URL = 'https://api-ai.qiliangjia.org/v1/chat-messages';
-const API_KEY = process.env.DIFY_API_KEY;
+const API_URL = 'https://api-ai.qiliangjia.org/v1/chat-messages'
+const API_KEY = process.env.DIFY_API_KEY
 
-export async function callDify(query: string) {
+export async function callDify(query: string, systemMessage?: string) {
+  const fullMessage = `System: ${systemMessage}\n\nUser: ${query}`
   try {
     const response = await fetch(API_URL, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${API_KEY}`,
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        user: 'test-user-001',
+        user: 'review-bot',
         inputs: {},
-        query,
-      }),
-    });
+        query: fullMessage
+      })
+    })
 
-    const data: any = await response.json();
+    const data: any = await response.json()
 
     if (response.ok) {
-      return data.answer;
+      return data.answer
     } else {
-      throw new Error(data.error);
+      throw new Error(data.error)
     }
   } catch (error) {
-    throw error;
+    throw error
   }
 }
-

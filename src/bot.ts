@@ -22,9 +22,11 @@ export class Bot {
   private readonly api: ChatGPTAPI | null = null // not free
 
   private readonly options: Options
+  private readonly openaiOptions: OpenAIOptions
 
   constructor(options: Options, openaiOptions: OpenAIOptions) {
     this.options = options
+    this.openaiOptions = openaiOptions
     if (process.env.DIFY_API_KEY) {
       const currentDate = new Date().toISOString().split('T')[0]
       const systemMessage = `${options.systemMessage} 
@@ -70,7 +72,14 @@ IMPORTANT: Entire response must be in the language with ISO code: ${options.lang
 
   private chat_dify = async (message: string): Promise<string> => {
     try {
-      return pRetry(() => callDify(message), {
+      const currentDate = new Date().toISOString().split('T')[0]
+      const systemMessage = `${this.options.systemMessage} 
+Knowledge cutoff: ${this.openaiOptions.tokenLimits.knowledgeCutOff}
+Current date: ${currentDate}
+
+IMPORTANT: Entire response must be in the language with ISO code: ${this.options.language}
+`
+      return pRetry(() => callDify(message, systemMessage), {
         retries: this.options.openaiRetries
       })
     } catch (e: unknown) {
