@@ -22,7 +22,7 @@ import {getTokenCount} from './tokenizer'
 const context = github_context
 const repo = context.repo
 
-const ignoreKeyword = '@ReviewBotai: ignore'
+const ignoreKeyword = '@ReviewBot: ignore'
 
 export const codeReview = async (
   lightBot: Bot,
@@ -458,16 +458,6 @@ ${SHORT_SUMMARY_START_TAG}
 ${inputs.shortSummary}
 ${SHORT_SUMMARY_END_TAG}
 
----
-
-<details>
-<summary>Uplevel your code reviews with ReviewBot Pro</summary>
-
-### ReviewBot Pro
-
-If you like this project, please support us by purchasing the [Pro version](https://ReviewBot.ai). The Pro version has advanced context, superior noise reduction and several proprietary improvements compared to the open source version. Moreover, ReviewBot Pro is free for open source projects.
-
-</details>
 `
 
   statusMsg += `
@@ -723,16 +713,16 @@ ${
 <details>
 <summary>Tips</summary>
 
-### Chat with <img src="https://avatars.githubusercontent.com/in/347564?s=41&u=fad245b8b4c7254fe63dd4dcd4d662ace122757e&v=4" alt="Image description" width="20" height="20">  ReviewBot Bot (\`@ReviewBotai\`)
+### Chat with <img src="https://www.qiliangjia.com/favicon.ico" alt="Image description" width="20" height="20">  ReviewBot Bot (\`@ReviewBot\`)
 - Reply on review comments left by this bot to ask follow-up questions. A review comment is a comment on a diff or a file.
-- Invite the bot into a review comment chain by tagging \`@ReviewBotai\` in a reply.
+- Invite the bot into a review comment chain by tagging \`@ReviewBot\` in a reply.
 
 ### Code suggestions
 - The bot may make code suggestions, but please review them carefully before committing since the line number ranges may be misaligned. 
 - You can edit the comment made by the bot and manually tweak the suggestion if it is slightly off.
 
 ### Pausing incremental reviews
-- Add \`@ReviewBotai: ignore\` anywhere in the PR description to pause further reviews from the bot.
+- Add \`@ReviewBot: ignore\` anywhere in the PR description to pause further reviews from the bot.
 
 </details>
 `
